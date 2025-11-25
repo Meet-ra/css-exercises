@@ -24,3 +24,56 @@ img {
   justify-content: center;
   background: #eee;
 }
+
+
+.allinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  
+}
+
+.items {
+  display: flex;
+  justify-content: center;
+  gap:52px;
+}
+
+.item {
+  width: 200px; /*GPT : max-width is better: prevents overflow*/
+  text-align: center;
+
+}
+
+/* 
+# Quick verdict
+
+**File 2 is better as a starting point** because it expresses the layout structure more clearly (`.allinfo` → column, `.items` → row, `.item` → individual card). That makes the markup easier to read and the CSS easier to extend.
+
+However — File 2 has a few practical problems (fixed `.item` width, images with forced height, possible footer overlap) that make File 1’s **responsiveness** and some choices (like `max-width` on `.info`) slightly preferable in isolation. The best choice is to keep File 2’s clearer structure but fix a few issues. Below I explain why and give a small improved CSS you can drop in.
+
+---
+
+# Comparison (short)
+
+* **Structure / semantics**
+
+  * **File 2 wins.** Class names match layout roles (`.allinfo`, `.items`, `.item`) making intent clear.
+  * File 1 is simpler but less explicit (only `.container` and `.info`).
+
+* **Responsiveness**
+
+  * **File 1 has an advantage** because `.info { max-width: 200px; }` adapts better to small screens.
+  * File 2 uses `.item { width: 200px; }` which can cause horizontal overflow on narrow screens.
+
+* **Reusability & flexibility**
+
+  * File 2’s split into column container + inner row is more flexible for complex layouts (easy to reorder, change gaps, etc.).
+
+* **Accessibility / layout robustness**
+
+  * Both files force `img { width:100px; height:100px; }` — that breaks aspect ratio. Use `width` or `max-width` plus `height: auto` instead.
+  * The fixed footer from both files can overlap
+
+*/
