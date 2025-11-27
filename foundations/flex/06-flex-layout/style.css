@@ -1,10 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
-  height: 100vh;
+
+
+  height: 100vh;  /* 100% of viewport */
   margin: 0;
   overflow: hidden;
   font-family: Roboto, sans-serif;
+
+
+/* me */
+  display:flex;
+  flex-direction: column;
+  justify-content:space-between ; /*odin's solution does not have this*/
+/* but if I don't add justify, footer sticks to content in the middle of the page */
+
 }
 
 img {
@@ -16,6 +26,13 @@ button {
   border: none;
   border-radius: 8px;
   background: #eee;
+  
+  
+  
+  
+  font-weight: bold;/*odin's solution does 
+  not have this*/
+  padding: 10px 24px;
 }
 
 input {
@@ -24,3 +41,109 @@ input {
   padding: 8px 24px;
   width: 400px;
 }
+
+
+
+
+/* me */
+
+ul {
+  list-style-type: none ;
+  margin: 0px;
+  padding:0px;
+}
+a {
+  text-decoration: none;
+  color:black
+}
+
+.header, .footer {
+
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+
+}
+/* odin's solution has combined my links and ul.
+ odin adds flex to ul. 
+ I did the same at first but it didn't work. why? don't ask me!*/
+.left-links, .right-links {
+  display: flex;
+  justify-content:center ;
+  gap:16px;
+  
+}
+
+
+.footer {
+  background-color: #eeeeee;
+}
+
+
+/* .content {
+  align-self: center;
+  text-align: center;
+} */
+
+
+.content {
+  /* flex:1; odin solution has this. 
+  don't ask why :) */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; 
+  odin's solution have this. adding this to 
+  my solution is extra */
+  gap:16px;
+}
+
+
+
+/* file1=odin */
+
+/* Short answer: **CSS file 1 is the better starting point** — it’s cleaner, more deliberate (uses `flex: 1` to push the footer to the bottom) and groups layout concerns in sensible places.
+File 2 works too, but it contains more noisy comments, duplicated/contradictory rules, and some fragile choices (fixed sizes everywhere, `overflow: hidden` on `body`, inconsistent colors). Below I explain concretely, then give a compact improved CSS that merges the best parts and fixes problems.
+
+# Why file 1 is better (practical reasons)
+
+* **Layout clarity**: file 1 uses `body { display: flex; flex-direction: column }` *and* `.content { flex: 1 }`, a commonly used, reliable pattern to keep header/top, flexible middle, and footer pinned to bottom. File 2 relies on `body { justify-content: space-between }`, which also works but mixes concerns and is a little less explicit about which region should expand.
+* **Cleaner structure**: file 1 groups layout and visual rules with minimal comments and duplication. File 2 repeats font declarations and has extra commented text that can confuse maintenance.
+* **Conciseness**: file 1 applies layout at the component level (.content, .header, .footer), making it easier to reason about spacing and alignment.
+
+# Problems in both files (things to fix)
+
+1. `overflow: hidden` on `body` — this prevents page scrolling and will hide content on small screens. Remove unless you intentionally want to clip everything.
+2. Fixed widths: `img { width: 600px }` and `input { width: 400px }` are not responsive. Use `max-width` and relative units so the layout works on phones.
+3. Duplicate `body` rules in file 1 — they’re harmless but confusing; consolidate.
+4. Missing focus styles and not enough color contrast on `a` and `.footer` backgrounds — accessibility tweaks are needed.
+5. Repeated font-family declarations on many selectors — set once on `body`.
+6. Buttons lack visual affordance on focus and hover.
+7. File 2 has extra `justify-content:center` on `.left-links` and `.right-links` which is unnecessary because `ul` will be placed in header/footer with space-between; it won’t do harm but is redundant.
+
+# What to keep from each
+
+* From file 1: `.content { flex: 1 }`, semantic header/footer layout, `gap` usage.
+* From file 2: improved button padding and `font-weight: bold` (if you want stronger buttons).
+* From both: Roboto import and basic reset of `ul`/`a`.
+
+# Suggested improved CSS (responsive, accessible, concise)
+
+Use this instead — it merges strengths, fixes problems, and is ready to drop into your HTML:
+
+./gtpsolution.css
+
+# Final verdict / recommendation
+
+* **Pick file 1 as the baseline** (it’s cleaner and intentionally structured).
+* Use file 2’s button weight/padding if you prefer stronger buttons.
+* Replace fixed widths and remove `overflow: hidden`. Use the improved CSS above (or adapt it) to make your layout responsive and accessible.
+
+If you want, I can:
+
+* produce a diff between file 1 and file 2 highlighting exact changed lines, or
+* create a minimal HTML + CSS codepen-style demo with the improved CSS so you can test it in different viewport sizes.
+
+Which would you like next? (I’ll just do it now if you pick — no waiting!)
+ */
+ 
